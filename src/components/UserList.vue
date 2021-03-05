@@ -3,17 +3,18 @@
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
+      <th scope="col" @click="test">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Age</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    <tr
+    v-for="(user, i) of users">
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.name | toUpper}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.age}}</td>
     </tr>
     </tbody>
   </table>
@@ -21,7 +22,18 @@
 
 <script>
 export default {
-name: "UserList"
+name: "UserList",
+props: ['users'],
+methods: {
+  test() {
+    console.log(this.users);
+  }
+},
+filters: {
+  toUpper(val) {
+    return val[0].toUpperCase() + val.slice(1);
+  }
+}
 }
 </script>
 

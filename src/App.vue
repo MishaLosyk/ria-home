@@ -3,10 +3,14 @@
     <div class="w-75 p-3">
       <h2>Інформація про користувача</h2>
       <hr>
-      <AddUser/>
+      <AddUser
+      @add='add'
+      />
       <hr>
-      <p class="text-lg-left">Кількість користувачів: <b>0</b></p>
-      <UserList/>
+      <p class="text-lg-left">Кількість користувачів: <b>{{userLength}}</b></p>
+      <UserList
+      v-bind:users="users"
+      />
     </div>
   </div>
 </template>
@@ -23,6 +27,21 @@ export default {
   data() {
     return {
       users: []
+    }
+  },
+
+  methods: {
+    add (user) {
+      this.users.push(user);
+    }
+  },
+
+  computed: {
+    userLength(){
+      if(this.users){
+        return this.users.length;
+      }
+      return 0;
     }
   }
 }
